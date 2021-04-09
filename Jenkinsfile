@@ -39,7 +39,7 @@ pipeline {
             steps {
                 echo "Deploying version ${params.VERSION}"
                 echo "deploying with ${SERVER_CREDENTIALS}"
-                sh "${SERVER_CREDENTIALS}"
+                echo "${SERVER_CREDENTIALS}"
             }
         }
         stage('Test') {
@@ -48,7 +48,7 @@ pipeline {
                 withCredentials([
                     usernamePassword(credentials:'server-credentials', usernameVariable: USER, passwordVariable:PWD)
                 ]){
-                    sh "some script ${USER} ${PWD}"
+                    echo "some script ${USER} ${PWD}"
                 }
             }
         }
