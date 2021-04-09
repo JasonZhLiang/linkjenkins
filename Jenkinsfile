@@ -46,9 +46,9 @@ pipeline {
             steps {
                 echo 'Testing'
                 withCredentials([
-                    usernamePassword(credentials:'server-credentials', usernameVariable: USER, passwordVariable:PWD)
+                    usernamePassword(credentials:'server-credentials', usernameVariable: USER, passwordVariable: PASSWORD)
                 ]){
-                    echo "some script ${USER} ${PWD}"
+                    echo "some script ${USER} ${PASSWORD}"
                 }
             }
         }
