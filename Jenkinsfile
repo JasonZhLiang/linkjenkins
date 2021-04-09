@@ -40,6 +40,9 @@ pipeline {
                 echo "Deploying version ${params.VERSION}"
                 echo "deploying with ${SERVER_CREDENTIALS}"
                 echo "${SERVER_CREDENTIALS}"
+                withCredentials([usernamePassword(credentialsId: 'jason-github', usernameVariable: USER, passwordVariable: PSW)]) {
+                  echo "username is $USER password is $PSW"
+                }
             }
         }
         stage('Test') {
