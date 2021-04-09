@@ -1,3 +1,4 @@
+def gv
 pipeline {
     agent any
     environment {
@@ -14,14 +15,25 @@ pipeline {
         jdk 'JDK'
     }
     stages {
+        stage('initScript') {
+            steps {
+                script {
+                    // def newname = "John"
+                    gv = load "script.groovy"
+                }
+            }
+        }
         stage('Hello') {
             when {
                 expression {
-                    env.BRANCH_NAME == 'master'
+                    env.BRANCH_NAME == 'main'
                 }
             }
             steps {
                 echo 'Hello World'
+                script {
+                    gv.buildApp()
+                }
             }
         }
         stage('Build') {
@@ -56,6 +68,9 @@ pipeline {
                   echo USERNAME
                   // or inside double quotes for string interpolation
                   echo "username is $USERNAME"
+                }
+                script {
+                    gv.testApp()
                 }
             }
         }
