@@ -3,6 +3,11 @@ pipeline {
 
     stages {
         stage('Hello') {
+            when {
+                expression {
+                    BRANCH_NAME == 'master'
+                }
+            }
             steps {
                 echo 'Hello World'
             }
